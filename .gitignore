@@ -24,13 +24,6 @@ logs/
 *.tmp
 *.cache
 
-### Ambiente Docker ###
-**/.dockerignore
-**/docker-compose.override.yml
-**/docker-compose.*.yml
-
-### Banco de dados local ###
-**/appsettings.Development.json
 **/local.db
 **/__pycache__/
 
@@ -56,14 +49,6 @@ jspm_packages/
 ### VS Code ###
 .history/
 *.code-workspace
-
-### MacOS ###
-.DS_Store
-
-### Arquivos de configuração sensíveis ###
-**/appsecrets.json
-**/appsettings.Local.json
-**/appsettings.Production.json
 
 ### Migrações do EF Core (opcional - descomente se não quiser versionar) ###
 # **/Migrations/
