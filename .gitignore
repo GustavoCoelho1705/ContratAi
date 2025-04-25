@@ -1,0 +1,73 @@
+# .gitignore para ContratAí (DDD + .NET 8 + Docker)
+
+### Diretórios gerados pelo IDE/Editor ###
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.swp
+
+### Dependências do .NET ###
+**/bin/
+**/obj/
+**/TestResults/
+**/.vs/
+**/.vscode/
+*.nupkg
+*.nuget.props
+*.nuget.targets
+
+### Logs e arquivos temporários ###
+logs/
+*.log
+*.tmp
+*.cache
+
+### Ambiente Docker ###
+**/.dockerignore
+**/docker-compose.override.yml
+**/docker-compose.*.yml
+
+### Banco de dados local ###
+**/appsettings.Development.json
+**/local.db
+**/__pycache__/
+
+### Pacotes do frontend (se houver) ###
+node_modules/
+jspm_packages/
+*.sass-cache
+
+### Arquivos de usuário específicos ###
+*.userprefs
+*.bak
+
+### Ferramentas de build ###
+**/wwwroot/lib/
+**/artifacts/
+**/packages/
+**/publish/
+
+### Configurações do Rider/ReSharper ###
+**/_ReSharper.*
+*.DotSettings.user
+
+### VS Code ###
+.history/
+*.code-workspace
+
+### MacOS ###
+.DS_Store
+
+### Arquivos de configuração sensíveis ###
+**/appsecrets.json
+**/appsettings.Local.json
+**/appsettings.Production.json
+
+### Migrações do EF Core (opcional - descomente se não quiser versionar) ###
+# **/Migrations/
+
+### Serilog (opcional) ###
+**/Logs/
+*.jsonlog
