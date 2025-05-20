@@ -1,0 +1,6 @@
+@ContratAi.API_HostAddress = http://localhost:5009
+
+GET {{ContratAi.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
