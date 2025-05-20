@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\src\ContratAi.Application\ContratAi.Application.csproj" />
     <ProjectReference Include="..\src\ContratAi.Infrastructure\ContratAi.Infrastructure.csproj" />
   </ItemGroup>
 

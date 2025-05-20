@@ -1,3 +1,4 @@
+using ContratAi.Application.Services;
 using ContratAi.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,10 +26,19 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGet("/api/eventos", async (EventoAppService appService) =>
+{
+    var eventos = await appService.ListarTodosEventosAsync();
+    return Results.Ok(eventos);
+})
+.WithName("ListarTodosEventos")
+.WithTags("Eventos");
 
 app.Run();
