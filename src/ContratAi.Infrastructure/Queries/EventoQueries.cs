@@ -8,6 +8,6 @@ namespace ContratAi.Infrastructure.Queries
 {
     public static class EventoQueries
     {
-        public const string ListarEventoPorId = @"SELECT * FROM ""Eventos"" WHERE ""ID"" = @Id";
+        public const string ListarEventoPorIdColaborador = @"SELECT * FROM ""Eventos"" WHERE ""OrganizadorId"" = @Id";
     }
 }

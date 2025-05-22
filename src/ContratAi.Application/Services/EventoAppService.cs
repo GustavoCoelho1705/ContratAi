@@ -21,5 +21,25 @@ namespace ContratAi.Application.Services
         {
             return await _eventoRepository.ListarTodosEventosAsync();
         }
+
+        public async Task<Evento?> ListarEventoPorId(Guid id)
+        {
+            return await _eventoRepository.ListarEventoPorId(id);
+        }
+
+        public async Task<Guid> CadastraEvento(Evento evento)
+        {
+            return await _eventoRepository.CadastraEvento(evento);
+        }
+
+        public async Task<Evento> AtualizaEvento(Evento evento)
+        {
+            return await _eventoRepository.AtualizaEvento(evento);
+        }
+
+        public async Task DeletaEvento(Guid idEvento)
+        {
+            await _eventoRepository.DeletaEvento(idEvento);
+        }
     }
 }

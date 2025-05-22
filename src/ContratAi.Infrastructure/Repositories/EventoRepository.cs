@@ -1,25 +1,27 @@
 ﻿using ContratAi.Core.Entities.Eventos;
 using ContratAi.Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ContratAi.Infrastructure.Configurations.Dapper;
+using ContratAi.Infrastructure.Queries;
+using Dapper;
 
 namespace ContratAi.Infrastructure.Repositories
 {
-    public class EventoRepository : IEventoRepository
+    public class EventoRepository : EFRepository<Evento>, IEventoRepository 
     {
-        private readonly ApplicationDbContext _appDbContext;
-        public EventoRepository(ApplicationDbContext appDbContext)
+        private readonly DbConnectionProvider _dbProvider;
+        public EventoRepository(ApplicationDbContext appDbContext, DbConnectionProvider dbProvider) : base(appDbContext)
         {
-            _appDbContext = appDbContext;
+            _dbProvider = dbProvider;
         }
 
-        public async Task<IEnumerable<Evento>> ListarTodosEventosAsync()
+        public IEnumerable<Evento> GetEventoPorIdColaborador(Guid colaboradorId)
         {
-            return await _appDbContext.Eventos.AsNoTracking().ToListAsync();
+            var query = EventoQueries.ListarEventoPorIdColaborador;
+
+            using (var connection = _dbProvider.GetConnection())
+            {
+                return connection.Query<Evento>(query);
+            }
         }
     }
 }

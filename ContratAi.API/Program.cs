@@ -2,6 +2,7 @@ using ContratAi.API.GraphQL;
 using ContratAi.Application.Services;
 using ContratAi.Core.Interfaces;
 using ContratAi.Infrastructure;
+using ContratAi.Infrastructure.Configurations.Dapper;
 using ContratAi.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,24 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
 }, ServiceLifetime.Scoped);
 
+builder.Services.AddScoped<DbConnectionProvider>(sp =>
+{
+    var configuration = sp.GetRequiredService<IConfiguration>();
+    var connectionString = configuration.GetConnectionString("DefaultConnection");
+    return new DbConnectionProvider(connectionString);
+});
+
 builder.Services.AddScoped<IEventoRepository, EventoRepository>();
 builder.Services.AddScoped<EventoAppService>();
 
 builder.Services.AddGraphQLServer().AddQueryType<EventoQuery>();
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(
+        configuration.GetConnectionString("DefaultConnection"),
+        name: "PostgreSQL",
+        tags: new[] { "db", "sql", "postgres" }
+    );
 
 var app = builder.Build();
 
@@ -40,14 +55,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.MapGet("/api/eventos", async (EventoAppService appService) =>
-{
-    var eventos = await appService.ListarTodosEventosAsync();
-    return Results.Ok(eventos);
-})
-.WithName("ListarTodosEventos")
-.WithTags("Eventos");
 
 app.MapGraphQL("/graphql");
 

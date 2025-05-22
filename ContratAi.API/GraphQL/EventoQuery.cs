@@ -7,5 +7,8 @@ namespace ContratAi.API.GraphQL
     {
         public async Task<IEnumerable<Evento>> GetEventos([Service] EventoAppService appService)
             => await appService.ListarTodosEventosAsync();
+
+        public async Task<Evento?> ListarEventoPorId(Guid id, [Service] EventoAppService appService)
+            => await appService.ListarEventoPorId(id);
     }
 }

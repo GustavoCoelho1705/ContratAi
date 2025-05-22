@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ContratAi.Core.Interfaces
 {
-    public interface IEventoRepository
+    public interface IEventoRepository : IRepository<Evento>
     {
-        Task<IEnumerable<Evento>> ListarTodosEventosAsync();
+        IEnumerable<Evento> GetEventoPorIdColaborador(Guid colaboradorId);
     }
 }
