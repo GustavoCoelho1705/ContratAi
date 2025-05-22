@@ -7,13 +7,9 @@ namespace ContratAi.Infrastructure
 {
     public class ApplicationDbContext : DbContext
     {
-        private readonly string _connectionString;
-
-        public ApplicationDbContext() { }
-
-        public ApplicationDbContext(string connectionString)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
         {
-            _connectionString = connectionString;
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
@@ -27,14 +23,6 @@ namespace ContratAi.Infrastructure
         public DbSet<Evento> Eventos { get; set; }
         public DbSet<Convidado> Convidados { get; set; }
         public DbSet<EventoServico> EventosServicos { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseNpgsql(_connectionString);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

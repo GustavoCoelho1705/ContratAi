@@ -1,5 +1,8 @@
+using ContratAi.API.GraphQL;
 using ContratAi.Application.Services;
+using ContratAi.Core.Interfaces;
 using ContratAi.Infrastructure;
+using ContratAi.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -17,6 +20,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
 }, ServiceLifetime.Scoped);
+
+builder.Services.AddScoped<IEventoRepository, EventoRepository>();
+builder.Services.AddScoped<EventoAppService>();
+
+builder.Services.AddGraphQLServer().AddQueryType<EventoQuery>();
 
 var app = builder.Build();
 
@@ -40,5 +48,7 @@ app.MapGet("/api/eventos", async (EventoAppService appService) =>
 })
 .WithName("ListarTodosEventos")
 .WithTags("Eventos");
+
+app.MapGraphQL("/graphql");
 
 app.Run();
