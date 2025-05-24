@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace ContratAi.Core.Interfaces
 {
-    public interface IEventoRepository : IRepository<Evento>
+    public interface IConvidadoRepository : IRepository<Convidado>
     {
-        Task<IEnumerable<Evento>> GetEventosPorIdOrganizador(Guid organizadorId);
+        Task<IEnumerable<Convidado>> ObterConvidadosPorIdEvento(Guid eventoId);
     }
 }

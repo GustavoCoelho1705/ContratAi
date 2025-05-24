@@ -9,10 +9,10 @@ namespace ContratAi.Core.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        IEnumerable<T> ObterTodos();
-        T? ObterPorId(Guid id);
-        void Adicionar(T entidade);
-        void Atualizar(T entidade);
-        void Remover(Guid id);
+        Task<IEnumerable<T>> ObterTodos();
+        Task<T?> ObterPorId(Guid id);
+        Task<Guid> Adicionar(T entidade);
+        Task Atualizar(T entidade);
+        Task Remover(Guid id);
     }
 }

@@ -3,6 +3,7 @@ using ContratAi.Core.Interfaces;
 using ContratAi.Infrastructure.Configurations.Dapper;
 using ContratAi.Infrastructure.Queries;
 using Dapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContratAi.Infrastructure.Repositories
 {
@@ -14,14 +15,7 @@ namespace ContratAi.Infrastructure.Repositories
             _dbProvider = dbProvider;
         }
 
-        public IEnumerable<Evento> GetEventoPorIdColaborador(Guid colaboradorId)
-        {
-            var query = EventoQueries.ListarEventoPorIdColaborador;
-
-            using (var connection = _dbProvider.GetConnection())
-            {
-                return connection.Query<Evento>(query);
-            }
-        }
+        public async Task<IEnumerable<Evento>> GetEventosPorIdOrganizador(Guid organizadorId)
+            => await _dbSet.Where(e => e.OrganizadorId == organizadorId).ToListAsync();
     }
 }

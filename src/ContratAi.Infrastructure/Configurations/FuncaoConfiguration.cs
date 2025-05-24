@@ -22,7 +22,6 @@ public class FuncaoConfiguration : IEntityTypeConfiguration<Funcao>
             .HasForeignKey(uf => uf.FuncaoId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        // Seed de dados
         builder.HasData(
             new Funcao { Tipo = TipoFuncao.Admin, Descricao = "Administrador" },
             new Funcao { Tipo = TipoFuncao.OrganizadorEvento, Descricao = "Organizador de Eventos" },

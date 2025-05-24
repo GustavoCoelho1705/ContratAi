@@ -15,33 +15,35 @@ namespace ContratAi.Infrastructure.Repositories
             _dbSet = context.Set<T>();
         }
 
-        public void Adicionar(T entidade)
+        public async Task<Guid> Adicionar(T entidade)
         {
             entidade.DataCriacao = DateTime.UtcNow;
-            _dbSet.Add(entidade);
 
-            _context.SaveChanges();
+            await _dbSet.AddAsync(entidade);
+            await _context.SaveChangesAsync();
+
+            return entidade.Id;
         }
 
-        public void Atualizar(T entidade)
+        public async Task Atualizar(T entidade)
         {
             entidade.DataAtualizacao = DateTime.UtcNow;
 
             _dbSet.Update(entidade);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public T? ObterPorId(Guid id) =>
-            _dbSet.FirstOrDefault(entidade => entidade.Id == id);
+        public async Task<T?> ObterPorId(Guid id) =>
+            await _dbSet.FirstOrDefaultAsync(entidade => entidade.Id == id);
 
-        public IEnumerable<T> ObterTodos() =>
-            _dbSet.ToList();
+        public async Task<IEnumerable<T>> ObterTodos() =>
+            await _dbSet.ToListAsync();
 
-        public void Remover(Guid id)
+        public async Task Remover(Guid id)
         {
-            _dbSet.Remove(ObterPorId(id));
+            _dbSet.Remove(await ObterPorId(id));
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }
