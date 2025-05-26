@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ContratAi.Application.Interfaces;
 using ContratAi.Core.Entities.Usuarios;
 using ContratAi.Core.Interfaces;
 using System;
@@ -9,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace ContratAi.Application.Services
 {
-    public class PrestadorAppService
+    public class PrestadorAppService : IPrestadorAppService
     {
         private readonly IPrestadorRepository _prestadorRepository;
         public PrestadorAppService(IPrestadorRepository prestadorRepository)
-        {
-            _prestadorRepository = prestadorRepository;
-        }
-
+            => _prestadorRepository = prestadorRepository;
+           
         public async Task<IEnumerable<PrestadorServico>> ListarTodosPrestadores()
             => await _prestadorRepository.ObterTodos();
 

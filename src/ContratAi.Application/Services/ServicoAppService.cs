@@ -1,4 +1,5 @@
-﻿using ContratAi.Core.Entities.Servicos;
+﻿using ContratAi.Application.Interfaces;
+using ContratAi.Core.Entities.Servicos;
 using ContratAi.Core.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ContratAi.Application.Services
 {
-    public class ServicoAppService
+    public class ServicoAppService : IServicoAppService
     {
         private readonly IServicoRepository _servicoRepository;
         public ServicoAppService(IServicoRepository servicoRepository)

@@ -1,4 +1,4 @@
-﻿using ContratAi.Application.Input.Evento;
+﻿using ContratAi.Application.Dtos.Evento;
 using ContratAi.Application.Services;
 
 namespace ContratAi.API.GraphQL

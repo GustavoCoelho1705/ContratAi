@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ContratAi.Application.Input.Evento;
+using ContratAi.Application.Dtos.Evento;
 using ContratAi.Core.Entities.Eventos;
 
 namespace ContratAi.Application.Mappings
@@ -9,6 +9,7 @@ namespace ContratAi.Application.Mappings
         public EventoMappingProfile()
         {
             CreateMap<AdicionaEventoInput, Evento>();
+            CreateMap<AtualizaEventoInput, Evento>();
         }
     }
 }
